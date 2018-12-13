@@ -18,12 +18,22 @@ $router->get('/', function () use ($router) {
 $router->post('auth/login', ['uses' => 'AuthController@authenticate']);
 
 $router->group(['middleware' => 'jwt.auth'], function() use ($router) {
+
+    // Users api 
+
+    $router->get('users', 'UserController@index');
+    $router->get('users/{id}', 'UserController@show');
+    $router->post('users', 'UserController@store');
+    $router->put('users/{id}', 'UserController@update');
+    $router->delete('users/{id}', 'UserController@destroy');
+
+    // Products api 
     
+    $router->get('products', 'ProductController@index');
+    $router->get('products/{id}', 'ProductController@show');
+    $router->post('products', 'ProductController@store');
+    $router->put('products/{id}', 'ProductController@update');
+    $router->delete('products/{id}', 'ProductController@destroy');
     
-        $router->get('users', function() {$users = \App\User::all();
-            return response()->json($users);
-        });
 
-
-
-    });
+});

@@ -14,6 +14,7 @@ class JwtMiddleware
     public function getToken($request)
     {
         $token = null; 
+
         foreach (getallheaders() as $name => $value) {
             
             if($name == "Authorization")
@@ -39,7 +40,7 @@ class JwtMiddleware
             $credentials = JWT::decode($token, env('JWT_SECRET'), ['HS256']);
         } catch(ExpiredException $e) {
             return response()->json([
-                'error' => 'Provided token is expired.'
+                'error' => 'Token is expired.'
             ], 400);
         } catch(Exception $e) {
             return response()->json([

@@ -75,6 +75,8 @@ class AuthController extends BaseController
             'error' => 'Email or password is wrong.'
         ], 400);
     }
+
+    
 }
 
 
