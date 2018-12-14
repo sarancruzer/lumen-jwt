@@ -15,9 +15,16 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->post('auth/login', ['uses' => 'AuthController@authenticate']);
+// Without jwt middleware
+$router->group(['prefix' => 'api/v1'], function() use ($router) {
 
-$router->group(['middleware' => 'jwt.auth'], function() use ($router) {
+    $router->post('auth/login', ['uses' => 'AuthController@authenticate']);
+
+});
+
+
+// With jwt middleware
+$router->group(['prefix' => 'api/v1','middleware' => 'jwt.auth'], function() use ($router) {
 
     // Users api 
 

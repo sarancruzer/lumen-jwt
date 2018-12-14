@@ -31,6 +31,11 @@
 - php artisan make:migration add_paid_to_users --table="users"
 
 
+# To check db values 
+
+- php artisan tinker
+
+
 
 
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 
+use App\Http\Resources\UserResource;
 
 class UserController extends Controller
 {
@@ -40,9 +41,12 @@ class UserController extends Controller
     public function index()
     {
         //
-        $users = User::paginate(10);
+        // $users = User::paginate(10);
+        // $users = User::find(1)->product;
+        // $users = User::with('product')->paginate(10);
+        $users = UserResource::collection(User::with('product')->paginate(10));
         
-        return response()->json(['success' => '','data' => $users], 200);
+        return response()->json(['success' => '','result' => $users], 200);
 
     }
 
@@ -75,7 +79,7 @@ class UserController extends Controller
                 [
                     'response' => [
                         'created' => true,
-                        'userId' => $user
+                        'result' => $user
                     ]
                 ], 201
             );
@@ -101,7 +105,7 @@ class UserController extends Controller
                             'response' => [
                                 'success' => true,
                                 'message' => "User record!",
-                                'data' => $user
+                                'result' => $user
                             ]
                         ], 200
                     );
@@ -140,7 +144,7 @@ class UserController extends Controller
                 'response' => [
                     'success' => true,
                     'message' => "User udpated successfully!",
-                    'data' => $user
+                    'result' => $user
                 ]
             ], 200
         );
