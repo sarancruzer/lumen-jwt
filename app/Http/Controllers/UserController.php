@@ -43,10 +43,18 @@ class UserController extends Controller
         //
         // $users = User::paginate(10);
         // $users = User::find(1)->product;
-        // $users = User::with('product')->paginate(10);
-        $users = UserResource::collection(User::with('product')->paginate(10));
-        
-        return response()->json(['success' => '','result' => $users], 200);
+        $users = User::with('product')->paginate(10);
+        // $users =  UserResource::collection(User::with('product')->paginate(10));
+        // $users =  UserResource::make(User::with('product')->find(1));
+
+        // $users =  UserResource::collection(User::with('product')->paginate(10));
+        // return $users;
+
+
+        // $resource = new UserResource($user);
+
+        $users =  UserResource::make(User::with('product')->find(1));
+        return $users; 
 
     }
 

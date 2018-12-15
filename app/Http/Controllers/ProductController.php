@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 use App\Product;
 
+use App\Http\Resources\ProductResource;
+use App\Http\Resources\ProductsResource;
+
 class ProductController extends Controller
 {
   
@@ -40,8 +43,13 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with('user')->paginate(10);
-        return response()->json(['success' => '','data' => $products], 200);
+        // $products = Product::with('user')->paginate(10);
+
+        return $users = new ProductsResource(Product::with('user')->paginate(10));
+
+        // return new ProductsResource(Product::with(['user'])->paginate(10));
+
+         return response()->json(['success' => '','data' => $users], 200);
 
     }
 

@@ -35,6 +35,11 @@
 
 - php artisan tinker
 
+# Merge Json/Resource::with() when using a collection in an API Resource
+
+- https://github.com/laravel/ideas/issues/781
+
+
 
 
 
